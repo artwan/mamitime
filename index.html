@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+
+  <script>
+
+    // URL ระบบจริงของคุณ
+    const targetUrl =
+      "https://script.google.com/macros/s/AKfycbycenzLg6y00bcbzrbSGl01zTma5ynMQXH7nPw619B_au3bBrcWSAH5MKKVBYDbQCfUeg/exec;
+
+
+    function isLineBrowser() {
+      return navigator.userAgent.includes("Line");
+    }
+
+
+    function openExternal() {
+
+      // Android → Chrome
+      if (/Android/i.test(navigator.userAgent)) {
+
+        let chromeUrl =
+          "intent://" +
+          targetUrl.replace(/^https?:\/\//,'') +
+          "#Intent;scheme=https;package=com.android.chrome;end";
+
+        location.href = chromeUrl;
+
+      }
+
+      // iPhone/iPad → Safari
+      else if (/iPhone|iPad/i.test(navigator.userAgent)) {
+
+        let safariUrl =
+          targetUrl.replace("https://","x-safari-https://");
+
+        location.href = safariUrl;
+
+      }
+
+      // browser ปกติ
+      else {
+
+        location.href = targetUrl;
+
+      }
+    }
+
+
+    window.onload = function() {
+
+      if(isLineBrowser()) {
+
+        openExternal();
+
+        // fallback
+        setTimeout(function(){
+
+          document.getElementById("openBtn")
+            .style.display = "block";
+
+        },2000);
+
+      }
+      else {
+
+        location.href = targetUrl;
+
+      }
+
+    };
+
+  </script>
+
+</head>
+
+<body style="text-align:center;padding-top:50px;">
+
+  <h3>กำลังเปิดระบบ...</h3>
+
+  <button
+    id="openBtn"
+    onclick="openExternal()"
+    style="display:none;padding:12px 20px;">
+
+    เปิดด้วย Browser
+
+  </button>
+
+</body>
+</html>
