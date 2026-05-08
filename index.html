@@ -1,92 +1,31 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-  <base target="_top">
-
-  <script>
-
-    // URL ระบบจริงของคุณ
-    const targetUrl =
-      "https://script.google.com/macros/s/AKfycbycenzLg6y00bcbzrbSGl01zTma5ynMQXH7nPw619B_au3bBrcWSAH5MKKVBYDbQCfUeg/exec;
-
-
-    function isLineBrowser() {
-      return navigator.userAgent.includes("Line");
-    }
-
-
-    function openExternal() {
-
-      // Android → Chrome
-      if (/Android/i.test(navigator.userAgent)) {
-
-        let chromeUrl =
-          "intent://" +
-          targetUrl.replace(/^https?:\/\//,'') +
-          "#Intent;scheme=https;package=com.android.chrome;end";
-
-        location.href = chromeUrl;
-
-      }
-
-      // iPhone/iPad → Safari
-      else if (/iPhone|iPad/i.test(navigator.userAgent)) {
-
-        let safariUrl =
-          targetUrl.replace("https://","x-safari-https://");
-
-        location.href = safariUrl;
-
-      }
-
-      // browser ปกติ
-      else {
-
-        location.href = targetUrl;
-
-      }
-    }
-
-
-    window.onload = function() {
-
-      if(isLineBrowser()) {
-
-        openExternal();
-
-        // fallback
-        setTimeout(function(){
-
-          document.getElementById("openBtn")
-            .style.display = "block";
-
-        },2000);
-
-      }
-      else {
-
-        location.href = targetUrl;
-
-      }
-
-    };
-
-  </script>
-
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/ico" href="https://kanpao.github.io/docflow/images/favicon.ico">
+    <link rel="icon" href="https://kanpao.github.io/docflow/images/favicon.png" sizes="16x16 32x32 64x64" type="image/png">
+    <title>ระบบสลิปออนไลน์ อบจ.กาญจนบุรี (e-Slip)</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
 </head>
-
-<body style="text-align:center;padding-top:50px;">
-
-  <h3>กำลังเปิดระบบ...</h3>
-
-  <button
-    id="openBtn"
-    onclick="openExternal()"
-    style="display:none;padding:12px 20px;">
-
-    เปิดด้วย Browser
-
-  </button>
-
+<body>
+    <iframe src="https://script.google.com/a/~/macros/s/AKfycbzqC-_JgY6loeHdJiyu4CZqUHTbhyz92v7j60GlRbG-bcmkXAQMWsKHkZnwEq4W93M/exec" frameborder="0"></iframe>
 </body>
+
 </html>
