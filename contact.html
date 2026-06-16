@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ติดต่อห้องคลอด รพ.เจ้าคุณไพบูลย์ พนมทวน</title>
+    <style>
+        /* โหลดฟอนต์ LINE Seed Sans TH ตามที่กำหนด */
+        @font-face {
+            font-family: 'LINE Seed Sans TH';
+            src: url('https://artwan.github.io/fonts/LINESeedSansTH/LINESeedSansTH_W_Rg.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'LINE Seed Sans TH';
+            src: url('https://artwan.github.io/fonts/LINESeedSansTH/LINESeedSansTH_W_Bd.woff2') format('woff2');
+            font-weight: bold;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+            font-family: 'LINE Seed Sans TH', sans-serif;
+            /* พื้นหลังไล่สีละมุนตา */
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* พื้นหลังสีดำโปร่งแสง */
+        .overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(4px); /* เอฟเฟคเบลอหลังแบบกระจก */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        /* ตัวกล่องป๊อบอัพ */
+        .popup-card {
+            background: #ffffff;
+            width: 85%;
+            max-width: 380px;
+            border-radius: 24px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            /* แอนิเมชันเด้งดึ๋งเล็กน้อยตอนเปิด */
+            transform: scale(0.8) translateY(30px);
+            opacity: 0;
+            animation: popUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.1s forwards;
+        }
+
+        /* ไอคอนด้านบน */
+        .icon-circle {
+            width: 80px;
+            height: 80px;
+            background: #fff0f5; /* สีชมพูอ่อน สื่อถึงเด็กอ่อน/ห้องคลอด */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            margin: 0 auto 20px auto;
+            box-shadow: 0 10px 20px rgba(255, 182, 193, 0.4);
+        }
+
+        h1 {
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 0 0 25px 0;
+            line-height: 1.4;
+        }
+
+        /* กล่องแสดงเบอร์โทร */
+        .contact-box {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 16px;
+            padding: 15px;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block; /* ทำให้กดได้ทั้งกล่อง */
+        }
+
+        .contact-box:active {
+            background: #e2e6ea;
+            transform: scale(0.98);
+        }
+
+        .label {
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 4px;
+            font-weight: normal;
+        }
+
+        .number {
+            font-size: 20px;
+            font-weight: bold;
+            color: #00B900; /* ใช้สีเขียว LINE เพื่อความคุ้นเคยว่าคือกดโทร/ติดต่อ */
+            letter-spacing: 0.5px;
+        }
+        
+        .extension {
+            font-size: 16px;
+            color: #e74c3c;
+        }
+
+        /* ปุ่มปิด */
+        .close-btn {
+            margin-top: 15px;
+            background: transparent;
+            border: none;
+            color: #95a5a6;
+            font-size: 16px;
+            font-family: 'LINE Seed Sans TH', sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: background 0.2s;
+        }
+
+        .close-btn:active {
+            background: #f1f2f6;
+            color: #2c3e50;
+        }
+
+        /* Keyframes */
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        @keyframes popUp {
+            to { 
+                transform: scale(1) translateY(0); 
+                opacity: 1; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="overlay" id="popupOverlay">
+        <div class="popup-card">
+            <!-- เปลี่ยน Emoji ไอคอนได้ตามต้องการ -->
+            <div class="icon-circle">👶🏻</div>
+            
+            <h1>ห้องคลอด<br>รพ.เจ้าคุณไพบูลย์ พนมทวน</h1>
+            
+            <!-- กล่องที่ 1: เบอร์โทรศัพท์พื้นฐาน -->
+            <!-- ใส่เครื่องหมายจุลภาค (,) เพื่อให้มือถือพักสายก่อนกดต่อเบอร์ภายใน -->
+            <a href="tel:034579031,112" class="contact-box">
+                <div class="label">เบอร์โทรศัพท์</div>
+                <div class="number">0 3457 9031 <span class="extension">ต่อ 112</span></div>
+            </a>
+
+            <!-- กล่องที่ 2: เบอร์มือถือ -->
+            <a href="tel:0927205750" class="contact-box">
+                <div class="label">โทรศัพท์มือถือ</div>
+                <div class="number">09 2720 5750</div>
+            </a>
+
+            <!-- หากต้องการให้ปุ่มปิดทำงานได้ (ซ่อนป๊อบอัพ) สามารถเปิดใช้งานโค้ดนี้ได้ -->
+            <!-- <button class="close-btn" onclick="document.getElementById('popupOverlay').style.display='none'">ปิดหน้าต่าง</button> -->
+        </div>
+    </div>
+
+</body>
+</html>
